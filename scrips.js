@@ -76,7 +76,6 @@ const saveStorage = (data) => {
 
 
 function loadinPage(){
-    console.log('loadinPage')
     
     if(localStorage.myarr){
         arrTarefa = JSON.parse(localStorage.getItem("myarr"))
@@ -95,6 +94,8 @@ function loadinPage(){
     setInterval(() => {
         main.style.opacity = "1"
     }, 500)
+
+    input.focus()
 }
 
 const mostrarEnaoMostrar = () => {
@@ -124,7 +125,6 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
     const formData = new FormData(form)
     const data = Object.fromEntries(formData)
-    console.log(data)
 
     const {tarefa} = data
     animarMain()
@@ -141,7 +141,6 @@ document.addEventListener('click', (e) => {
     const parent = element.closest('div')
 
     let title
-    console.log(element, parent)
 
     if(parent && parent.querySelector('h3')){
         title = parent.querySelector('h3').innerText
