@@ -1,0 +1,110 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background-color: rgb(157, 155, 172);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+main{
+    background-color: white;
+    width: 400px;
+    padding: 10px;
+    transform: scale(0.98);
+    opacity: 0;
+    height: auto;
+    transition: transform 0.3s ease-out, opacity 1s ease-out;
+
+    border-radius: 10px;
+    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.438);
+}
+
+h1{
+    text-align: center;
+}
+
+form{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 15px;
+    
+}
+
+form input{
+    padding: 7px;
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    flex: 1;
+}
+
+button{
+    cursor: pointer;
+    padding: 1px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+button span
+{
+    pointer-events: none;
+}
+
+.mostrar{
+    padding: 15px;
+    border-top: 2px solid rgba(0, 0, 0, 0.445);
+}
+
+.tarefa{
+    display: flex;
+    align-items: center;
+    padding: 0.3rem;
+    margin-bottom: 0.3rem;
+    transform-origin: right;
+    transform: translateX(-100%);
+    transition: all .4s ease-out;
+    opacity: 0;
+    border-radius: 8px;
+}
+
+.visible{
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.remove{
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.tarefa h3{
+    font-size: 1rem;
+    flex: 1;
+}
+
+.tarefa button{
+    margin-left: 1rem;
+}
+
+.checked{
+    text-decoration: line-through;
+    font-style: italic;
+    background-color:rgba(0, 0, 0, 0.24);
+}
+
+.hidden{
+    display: none;
+}
+
+.trasition{
+    transition: all 0.5s ease;
+}

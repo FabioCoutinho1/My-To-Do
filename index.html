@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <script src="scrips.js" defer></script>
+    <title>TODO</title>
+</head>
+
+<body onload="loadinPage();">
+    <main>
+        <header>
+            <h1>To Do List</h1>
+        </header>
+
+        <form >
+            <input type="text" name="tarefa" id="id_tarefa" placeholder="Adicionar Tarefa" required>
+            <button type="submit">
+                <span class="material-symbols-outlined">
+                    add
+                </span>
+            </button>
+        </form>
+
+        <form id="edit_form" class="hidden">
+            <input type="text" name="tarefa_edit" id="id_tarefa_edit" placeholder="Editar Tarefa" required>
+            <button type="submit">
+                salvar
+            </button>
+
+            <button id="cancel_btn">
+                cancelar
+            </button>
+        </form>
+
+        <div class="mostrar">
+            
+        </div>
+    </main>
+</body>
+
+</html>
