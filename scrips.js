@@ -173,7 +173,7 @@ document.addEventListener("click", (e) => {
         setTimeout(() => {
             parent.remove();
             animarMain();
-            arrTarefa = arrTarefa.filter((item) => item.tarefa !== title);
+            arrTarefa = arrTarefa.map((item) => item.tarefa !== title);
             localStorage.myarr = JSON.stringify(arrTarefa);
         }, 500);
     }
