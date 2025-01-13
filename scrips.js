@@ -10,7 +10,7 @@ let arrTarefa = [];
 
 let oldvalvue = "";
 
-const cratTarefa = (text) => {
+const criarTarefa = (text) => {
   const divTarefa = document.createElement("div");
   divTarefa.classList.add("tarefa");
 
@@ -55,7 +55,7 @@ const removeDiv = (element) => {
   }, 100);
 };
 
-const saveStorage = (data) => {
+const salvarNoLocalStorage = (data) => {
   if (localStorage.myarr) {
     arrTarefa = JSON.parse(localStorage.getItem("myarr"));
   }
@@ -73,7 +73,7 @@ function loadinPage() {
   console.log(arrTarefa);
 
   arrTarefa.forEach((item) => {
-    cratTarefa(item.tarefa);
+    criarTarefa(item.tarefa);
     if (item.checked) {
       const div = boxTarefa.lastElementChild;
       div.classList.add("checked");
@@ -116,8 +116,8 @@ form.addEventListener("submit", (e) => {
 
   const { tarefa } = data;
   animarMain();
-  cratTarefa(tarefa);
-  saveStorage(data);
+  criarTarefa(tarefa);
+  salvarNoLocalStorage(data);
 
   input.value = "";
   input.focus();
