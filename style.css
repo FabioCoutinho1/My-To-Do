@@ -1,21 +1,21 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-body{
+body {
     background-color: rgb(157, 155, 172);
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100dvw;
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
 }
 
-main{
+main {
     background-color: white;
     width: 400px;
     padding: 10px;
@@ -28,43 +28,42 @@ main{
     box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.438);
 }
 
-h1{
+h1 {
     text-align: center;
 }
 
-form{
+form {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 15px;
-    
+
 }
 
-form input{
+form input {
     padding: 7px;
     border-radius: 8px;
     background-color: rgb(255, 255, 255);
     flex: 1;
 }
 
-button{
+button {
     cursor: pointer;
     padding: 1px;
     border-radius: 8px;
     font-weight: bold;
 }
 
-button span
-{
+button span {
     pointer-events: none;
 }
 
-.mostrar{
+.mostrar {
     padding: 15px;
     border-top: 2px solid rgba(0, 0, 0, 0.445);
 }
 
-.tarefa{
+.tarefa {
     display: flex;
     align-items: center;
     padding: 0.3rem;
@@ -76,35 +75,45 @@ button span
     border-radius: 8px;
 }
 
-.visible{
+.visible {
     opacity: 1;
     transform: translateX(0);
 }
 
-.remove{
+.remove {
     transform: translateX(100%);
     opacity: 0;
 }
 
-.tarefa h3{
+.tarefa h3 {
     font-size: 1rem;
     flex: 1;
 }
 
-.tarefa button{
+.tarefa button {
     margin-left: 1rem;
 }
 
-.checked{
+.checked {
     text-decoration: line-through;
     font-style: italic;
-    background-color:rgba(0, 0, 0, 0.24);
+    background-color: rgba(0, 0, 0, 0.24);
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-.trasition{
+.trasition {
     transition: all 0.5s ease;
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        align-items: start;
+    }
+
+    main {
+        margin-top: 15px;
+    }
 }
