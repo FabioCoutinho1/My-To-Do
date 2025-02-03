@@ -1,119 +1,232 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-    background-color: rgb(157, 155, 172);
-    height: 100dvh;
-    width: 100dvw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+:root {
+  --primare: rgba(35, 35, 35, 0.84);
+  --inputs-and-buttons-colors: rgba(58, 58, 58, 1);
+  --text-corlos: rgba(163, 163, 163, 1);
+  --task-done: rgba(84, 84, 84, 0.71);
 }
 
 main {
-    background-color: white;
-    width: 400px;
-    padding: 10px;
-    transform: scale(0.98);
-    opacity: 0;
-    height: auto;
-    transition: transform 0.3s ease-out, opacity 1s ease-out;
+  background-color: blue;
+  background-image: url(img/bgNigth.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
 
-    border-radius: 10px;
-    box-shadow: 4px 4px 5px 0px rgba(0, 0, 0, 0.438);
+  opacity: 0;
+  transition: transform 0.3s ease-out, opacity 1s ease-out;
 }
 
-h1 {
-    text-align: center;
+.menu_nav_asside_left {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primare);
+  padding: 16px;
+  flex: 0 1 420px;
+}
+
+.input_search {
+  position: relative;
+  justify-content: center;
+  display: flex;
+}
+
+.input_search input {
+  flex: 1;
+  padding: 10px 10px 10px 40px;
+  height: 45px;
+  outline: none;
+  border: none;
+  border-radius: 16px;
+  background-color: var(--inputs-and-buttons-colors);
+  box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  color: var(--text-corlos);
+  font-weight: bold;
+  font-size: 24px;
+  width: 100%;
+}
+
+.input_search input::placeholder {
+  color: var(--text-corlos);
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.input_search span {
+  left: 10px;
+  top: 10px;
+  position: absolute;
+  color: var(--text-corlos);
+}
+
+.main_mid_tasks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  padding: 16px;
 }
 
 form {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 15px;
-
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 form input {
-    padding: 7px;
-    border-radius: 8px;
-    background-color: rgb(255, 255, 255);
-    flex: 1;
+  padding: 16px 16px 16px 40px;
+  border-radius: 16px;
+  border: none;
+  background-color: var(--inputs-and-buttons-colors);
+  flex: 1;
+
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+form input::placeholder {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.button_add {
+  position: absolute;
+  left: 10px;
 }
 
 button {
-    cursor: pointer;
-    padding: 1px;
-    border-radius: 8px;
-    font-weight: bold;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  border: none;
 }
 
 button span {
-    pointer-events: none;
+  pointer-events: none;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .mostrar {
-    padding: 15px;
-    border-top: 2px solid rgba(0, 0, 0, 0.445);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .tarefa {
-    display: flex;
-    align-items: center;
-    padding: 0.3rem;
-    margin-bottom: 0.3rem;
-    transform-origin: right;
-    transform: translateX(-100%);
-    transition: all .4s ease-out;
-    opacity: 0;
-    border-radius: 8px;
+  background-color: var(--primare);
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  cursor: pointer;
+  align-items: center;
+  opacity: 0;
+  border-radius: 16px;
+}
+
+.tarefa .star {
+  font-size: 24px;
+  color: var(--text-corlos);
+}
+
+.tarefa .favorit{
+  color: yellow;
+}
+
+.more_opition_for_tasks_rigth {
+  display: flex;
+  flex: 0 1 320px;
+  position: fixed;
+  top: 0;
+  left: -320px;
+  justify-content: center;
+  background-color: var(--primare);
+  color: white;
+  padding: 16px;
+}
+
+.more_opition_for_tasks_rigth nav {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.more_opition_for_tasks_rigth h1{
+  padding: 25px;
+}
+
+.more_opition_for_tasks_rigth button {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: var(--inputs-and-buttons-colors);
+  box-shadow: 0px 4px 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  padding: 10px;
+
+  color: var(--text-corlos);
+}
+
+.more_opition_for_tasks_rigth button span{
+  color: var(--text-corlos);
 }
 
 .visible {
-    opacity: 1;
-    transform: translateX(0);
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .remove {
-    transform: translateX(100%);
-    opacity: 0;
+  transform: translateX(100%);
+  opacity: 0;
 }
 
 .tarefa h3 {
-    font-size: 1rem;
-    flex: 1;
-}
-
-.tarefa button {
-    margin-left: 1rem;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  flex: 1;
 }
 
 .checked {
-    text-decoration: line-through;
-    font-style: italic;
-    background-color: rgba(0, 0, 0, 0.24);
+  text-decoration: line-through 3px white;
+  font-style: italic;
+  background-color: var(--task-done);
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 .trasition {
-    transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 @media screen and (max-width: 600px) {
-    body {
-        align-items: start;
-    }
+  body {
+    align-items: start;
+  }
 
-    main {
-        margin-top: 15px;
-    }
+  main {
+    margin-top: 15px;
+  }
 }

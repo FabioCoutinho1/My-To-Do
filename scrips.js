@@ -18,39 +18,33 @@ const criarTarefa = (text) => {
 
   boxTarefa.appendChild(divTarefa);
 
-  setTimeout(() => {
-    divTarefa.classList.add("visible");
-  }, 100);
+  divTarefa.classList.add("visible");
+
+  const checkBtn = document.createElement("button");
+  checkBtn.classList.add("check");
+  checkBtn.innerHTML =
+    '<span class="material-symbols-outlined">radio_button_unchecked</span>';
+  divTarefa.appendChild(checkBtn);
 
   const textoTarefa = document.createElement("h3");
   textoTarefa.innerText = text;
   divTarefa.appendChild(textoTarefa);
 
-  const checkBtn = document.createElement("button");
-  checkBtn.classList.add("check");
-  checkBtn.innerHTML = '<span class="material-symbols-outlined"> check </span>';
-  divTarefa.appendChild(checkBtn);
+  const divStar = document.createElement("div");
+  divStar.classList.add("star");
+  divStar.innerHTML = '<span class="material-symbols-outlined"> star </span>';
+  divTarefa.appendChild(divStar)
 
   const editBtn = document.createElement("button");
   editBtn.classList.add("edit");
   editBtn.innerHTML = '<span class="material-symbols-outlined"> edit </span>';
-  divTarefa.appendChild(editBtn);
 
   const deleteBtn = document.createElement("button");
   deleteBtn.classList.add("delete");
   deleteBtn.innerHTML =
     '<span class="material-symbols-outlined"> delete </span>';
-  divTarefa.appendChild(deleteBtn);
 
   tarefas.push(divTarefa);
-};
-
-const animarMain = () => {
-  main.style.transform = "scale(1)";
-
-  setTimeout(() => {
-    main.style.transform = "scale(0.98)";
-  }, 500);
 };
 
 const removeDiv = (element) => {
@@ -69,7 +63,7 @@ const salvarNoLocalStorage = (data) => {
   return arrTarefa;
 };
 
-function loadinPage() {
+function carregarPagina() {
   if (localStorage.myarr) {
     arrTarefa = JSON.parse(localStorage.getItem("myarr"));
   }
@@ -135,7 +129,6 @@ form.addEventListener("submit", (e) => {
   const data = Object.fromEntries(formData);
 
   const { tarefa } = data;
-  animarMain();
   criarTarefa(tarefa);
   salvarNoLocalStorage(data);
 
@@ -176,7 +169,6 @@ document.addEventListener("click", (e) => {
 
   if (element.classList.contains("edit")) {
     mostrarEnaoMostrar();
-    animarMain();
 
     editInput.value = title;
     oldvalvue = title;
@@ -192,7 +184,6 @@ document.addEventListener("click", (e) => {
 
     setTimeout(() => {
       parent.remove();
-      animarMain();
       arrTarefa = arrTarefa.filter((item) => item.tarefa.trim() !== title);
       localStorage.myarr = JSON.stringify(arrTarefa);
     }, 500);
@@ -203,7 +194,6 @@ cancalBtn.addEventListener("click", (e) => {
   e.preventDefault();
 
   mostrarEnaoMostrar();
-  animarMain();
 });
 
 editForm.addEventListener("submit", (e) => {
@@ -216,7 +206,6 @@ editForm.addEventListener("submit", (e) => {
   }
 
   mostrarEnaoMostrar();
-  animarMain();
 });
 
 search.addEventListener("input", searchFunction);

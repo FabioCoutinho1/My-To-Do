@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Lateral</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            transition: margin-left 0.5s;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #111;
+            color: white;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: left 0.5s;
+            padding-top: 60px;
+        }
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+        .openbtn {
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #111;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar" id="mySidebar">
+        <a href="javascript:void(0)" onclick="closeNav()">×</a>
+        <a href="#" onclick="changeContent('Conteúdo 1')">Botão 1</a>
+        <a href="#" onclick="changeContent('Conteúdo 2')">Botão 2</a>
+        <a href="#" onclick="changeContent('Conteúdo 3')">Botão 3</a>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <div class="content" id="mainContent">
+            <button class="openbtn" onclick="openNav()">☰ Abrir Menu</button>
+            <h2>Conteúdo Principal</h2>
+            <p>Este é o conteúdo principal da div.</p>
+        </div>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.left = "0";
+            document.getElementById("mainContainer").style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.left = "-250px";
+            document.getElementById("mainContainer").style.marginLeft = "0";
+        }
+
+        function changeContent(content) {
+            document.getElementById("mainContent").innerHTML = `
+                <button class="openbtn" onclick="openNav()">☰ Abrir Menu</button>
+                <h2>${content}</h2>
+                <p>Este é o novo conteúdo da div.</p>
+            `;
+        }
+    </script>
+</body>
+</html>
