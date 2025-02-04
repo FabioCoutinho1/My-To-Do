@@ -6,6 +6,7 @@ const boxTarefa = document.querySelector(".mostrar");
 const cancalBtn = document.querySelector("#cancel_btn");
 const main = document.querySelector("main");
 const search = document.querySelector("#search_tarefa");
+const menuLeft = document.querySelector(".more_opition_for_tasks_rigth")
 
 let arrTarefa = [];
 let tarefas = [];
@@ -33,7 +34,7 @@ const criarTarefa = (text) => {
   const divStar = document.createElement("div");
   divStar.classList.add("star");
   divStar.innerHTML = '<span class="material-symbols-outlined"> star </span>';
-  divTarefa.appendChild(divStar)
+  divTarefa.appendChild(divStar);
 
   const editBtn = document.createElement("button");
   editBtn.classList.add("edit");
@@ -45,6 +46,8 @@ const criarTarefa = (text) => {
     '<span class="material-symbols-outlined"> delete </span>';
 
   tarefas.push(divTarefa);
+
+
 };
 
 const removeDiv = (element) => {
@@ -80,6 +83,7 @@ function carregarPagina() {
   }, 500);
 
   input.focus();
+
 }
 
 const mostrarEnaoMostrar = () => {
@@ -103,24 +107,24 @@ const editTarefas = (text) => {
   });
 };
 
-const searchFunction = () => {
-  if (search.value !== "") {
-    for (let tarefa of tarefas) {
-      let title = tarefa.querySelector("h3");
-      title = title.textContent.toLowerCase();
-      let textOfSearch = search.value.toLowerCase();
-      if (!title.includes(textOfSearch)) {
-        tarefa.style.display = "none";
-      } else {
-        tarefa.style.display = "flex";
-      }
-    }
-  } else {
-    for (let tarefa of tarefas) {
-      tarefa.style.display = "flex";
-    }
-  }
-};
+// const searchFunction = () => {
+//   if (search.value !== "") {
+//     for (let tarefa of tarefas) {
+//       let title = tarefa.querySelector("h3");
+//       title = title.textContent.toLowerCase();
+//       let textOfSearch = search.value.toLowerCase();
+//       if (!title.includes(textOfSearch)) {
+//         tarefa.style.display = "none";
+//       } else {
+//         tarefa.style.display = "flex";
+//       }
+//     }
+//   } else {
+//     for (let tarefa of tarefas) {
+//       tarefa.style.display = "flex";
+//     }
+//   }
+// };
 
 //enventos
 form.addEventListener("submit", (e) => {
@@ -141,6 +145,11 @@ document.addEventListener("click", (e) => {
   const parent = element.closest("div");
 
   let title;
+  let div
+
+  if(element.closest(".tarefa" ) || element.closest("h3")){
+    menuLeft.classList.toggle("menu_view")
+  }
 
   if (parent && parent.querySelector("h3")) {
     title = parent.querySelector("h3").innerText;
@@ -208,4 +217,4 @@ editForm.addEventListener("submit", (e) => {
   mostrarEnaoMostrar();
 });
 
-search.addEventListener("input", searchFunction);
+// search.addEventListener("input", searchFunction);
