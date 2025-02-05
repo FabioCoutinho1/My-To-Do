@@ -6,7 +6,7 @@ const boxTarefa = document.querySelector(".mostrar");
 const cancalBtn = document.querySelector("#cancel_btn");
 const main = document.querySelector("main");
 const search = document.querySelector("#search_tarefa");
-const menuLeft = document.querySelector(".more_opition_for_tasks_rigth")
+const menuLeft = document.querySelector(".more_opition_for_tasks_rigth");
 
 let arrTarefa = [];
 let tarefas = [];
@@ -46,8 +46,6 @@ const criarTarefa = (text) => {
     '<span class="material-symbols-outlined"> delete </span>';
 
   tarefas.push(divTarefa);
-
-
 };
 
 const removeDiv = (element) => {
@@ -83,7 +81,6 @@ function carregarPagina() {
   }, 500);
 
   input.focus();
-
 }
 
 const mostrarEnaoMostrar = () => {
@@ -145,14 +142,14 @@ document.addEventListener("click", (e) => {
   const parent = element.closest("div");
 
   let title;
-  let div
-
-  if(element.closest(".tarefa" ) || element.closest("h3")){
-    menuLeft.classList.toggle("menu_view")
-  }
 
   if (parent && parent.querySelector("h3")) {
     title = parent.querySelector("h3").innerText;
+  }
+
+  if (element.closest(".tarefa") || element.closest("h3")) {
+    menuLeft.classList.add("menu_view");
+    menuLeft.querySelector("nav h1").textContent = title
   }
 
   if (element.classList.contains("check")) {
