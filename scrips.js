@@ -50,7 +50,8 @@ const criarTarefa = (text) => {
 
 const removeDiv = (element) => {
   setTimeout(() => {
-    element.classList.add("remove");
+    boxTarefa.querySelectorAll('*').remove()
+      
   }, 100);
 };
 
@@ -189,7 +190,6 @@ document.addEventListener("click", (e) => {
     removeDiv(div);
 
     setTimeout(() => {
-      parent.remove();
       arrTarefa = arrTarefa.filter((item) => item.tarefa.trim() !== title);
       localStorage.myarr = JSON.stringify(arrTarefa);
     }, 500);
