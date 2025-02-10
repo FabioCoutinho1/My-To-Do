@@ -7,6 +7,9 @@ const cancalBtn = document.querySelector("#cancel_btn");
 const main = document.querySelector("main");
 const search = document.querySelector("#search_tarefa");
 const menuLeft = document.querySelector(".more_opition_for_tasks_rigth");
+const btnDelete = document.querySelector(".delete");
+const btnEdit = document.querySelector(".edit");
+const tarefasFeitas = document.querySelector(".feitas");
 
 let arrTarefa = [];
 let tarefas = [];
@@ -48,11 +51,11 @@ const criarTarefa = (text) => {
   tarefas.push(divTarefa);
 };
 
-const removeDiv = (element) => {
-  setTimeout(() => {
-    boxTarefa.querySelectorAll('*').remove()
-      
-  }, 100);
+const removeDiv = (titleNav) => {
+  tarefas.forEach((i) => {
+    i.querySelector("h3").textContent === titleNav.textContent;
+    i.remove();
+  });
 };
 
 const salvarNoLocalStorage = (data) => {
@@ -74,6 +77,7 @@ function carregarPagina() {
     if (item.checked) {
       const div = boxTarefa.lastElementChild;
       div.classList.add("checked");
+      tarefasFeitas.appendChild(div);
     }
   });
 
@@ -144,26 +148,40 @@ document.addEventListener("click", (e) => {
 
   let title;
 
-  if (parent && parent.querySelector("h3")) {
-    title = parent.querySelector("h3").innerText;
+  if (parent && parent.querySelector("div h3")) {
+    title = parent.querySelector("div h3").innerText;
   }
 
   if (element.closest(".tarefa") || element.closest("h3")) {
     menuLeft.classList.add("menu_view");
-    menuLeft.querySelector("nav h1").textContent = title
+    menuLeft.querySelector("nav h1").textContent = title;
   }
 
   if (element.classList.contains("check")) {
     parent.classList.toggle("checked");
+
     if (parent.classList.contains("checked")) {
+      tarefasFeitas.appendChild(parent);
+      parent.querySelector(
+        "button"
+      ).innerHTML = `<span class="material-symbols-outlined"> radio_button_checked </span>`;
+
       arrTarefa = arrTarefa.map((item) => {
         if (item.tarefa === title) {
           item.checked = true;
           localStorage.myarr = JSON.stringify(arrTarefa);
+          if (item.checked === true) {
+            tarefasFeitas.appendChild(parent);
+          }
         }
         return item;
       });
     } else {
+      boxTarefa.appendChild(parent);
+
+      parent.querySelector("button").innerHTML =
+        '<span class="material-symbols-outlined">radio_button_unchecked</span>';
+
       arrTarefa = arrTarefa.map((item) => {
         if (item.tarefa === title) {
           item.checked = false;
@@ -172,27 +190,6 @@ document.addEventListener("click", (e) => {
         return item;
       });
     }
-  }
-
-  if (element.classList.contains("edit")) {
-    mostrarEnaoMostrar();
-
-    editInput.value = title;
-    oldvalvue = title;
-    console.log(oldvalvue);
-
-    editInput.focus();
-  }
-
-  if (element.classList.contains("delete")) {
-    const div = element.parentNode;
-
-    removeDiv(div);
-
-    setTimeout(() => {
-      arrTarefa = arrTarefa.filter((item) => item.tarefa.trim() !== title);
-      localStorage.myarr = JSON.stringify(arrTarefa);
-    }, 500);
   }
 });
 
@@ -214,4 +211,39 @@ editForm.addEventListener("submit", (e) => {
   mostrarEnaoMostrar();
 });
 
+btnDelete.addEventListener("click", () => {
+  const tituloMenuDireita = menuLeft.querySelector("nav h1").textContent;
+  const tituloTarefas = boxTarefa.querySelectorAll("h3");
+
+  tituloTarefas.forEach((tarefas) => {
+    if (tarefas.textContent.trim() === tituloMenuDireita.trim()) {
+      const tarefaPai = tarefas.parentNode
+      if (tarefaPai.classList.contains("checked")) {
+        tarefasFeitas.remove(tarefaPai);
+      } else {
+        tarefaPai.remove();
+      }
+    }
+  });
+
+  setTimeout(() => {
+    arrTarefa = arrTarefa.filter(
+      (item) => item.tarefa.trim() !== tituloMenuDireita
+    );
+    localStorage.myarr = JSON.stringify(arrTarefa);
+  }, 500);
+});
+
+btnEdit.addEventListener("click", () => {
+  const tituloMenuDireita = menuLeft.querySelector("nav h1").textContent;
+
+  mostrarEnaoMostrar();
+  console.log(tituloMenuDireita);
+
+  editInput.value = tituloMenuDireita;
+  oldvalvue = tituloMenuDireita;
+  console.log(oldvalvue);
+
+  editInput.focus();
+});
 // search.addEventListener("input", searchFunction);

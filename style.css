@@ -77,6 +77,10 @@ main {
   padding: 16px;
 }
 
+.feitas p{
+  color: white;
+}
+
 form {
   display: flex;
   align-items: center;
@@ -223,6 +227,7 @@ button span {
 .trasition {
   transition: all 0.5s ease;
 }
+
 
 @media screen and (max-width: 600px) {
   body {
