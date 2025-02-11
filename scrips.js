@@ -213,16 +213,12 @@ editForm.addEventListener("submit", (e) => {
 
 btnDelete.addEventListener("click", () => {
   const tituloMenuDireita = menuLeft.querySelector("nav h1").textContent;
-  const tituloTarefas = boxTarefa.querySelectorAll("h3");
+  const tituloTarefas = document.querySelectorAll(".tarefa h3");
 
   tituloTarefas.forEach((tarefas) => {
     if (tarefas.textContent.trim() === tituloMenuDireita.trim()) {
-      const tarefaPai = tarefas.parentNode
-      if (tarefaPai.classList.contains("checked")) {
-        tarefasFeitas.remove(tarefaPai);
-      } else {
-        tarefaPai.remove();
-      }
+      const tarefaPai = document.querySelector(".tarefa")
+      tarefaPai.remove()
     }
   });
 
