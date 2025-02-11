@@ -6,7 +6,7 @@ const boxTarefa = document.querySelector(".mostrar");
 const cancalBtn = document.querySelector("#cancel_btn");
 const main = document.querySelector("main");
 const search = document.querySelector("#search_tarefa");
-const menuLeft = document.querySelector(".more_opition_for_tasks_rigth");
+const menuRigth = document.querySelector(".more_opition_for_tasks_rigth");
 const btnDelete = document.querySelector(".delete");
 const btnEdit = document.querySelector(".edit");
 const tarefasFeitas = document.querySelector(".feitas");
@@ -51,13 +51,6 @@ const criarTarefa = (text) => {
   tarefas.push(divTarefa);
 };
 
-const removeDiv = (titleNav) => {
-  tarefas.forEach((i) => {
-    i.querySelector("h3").textContent === titleNav.textContent;
-    i.remove();
-  });
-};
-
 const salvarNoLocalStorage = (data) => {
   if (localStorage.myarr) {
     arrTarefa = JSON.parse(localStorage.getItem("myarr"));
@@ -80,28 +73,41 @@ function carregarPagina() {
       tarefasFeitas.appendChild(div);
     }
   });
-
+  
   setInterval(() => {
     main.style.opacity = "1";
   }, 500);
-
+  
   input.focus();
+  mostrarMenuDireita();
 }
+
+const mostrarMenuDireita = () => {
+  const titleMenu = menuRigth.querySelector("nav h1")
+  console.log(typeof(titleMenu.textContent))
+  if(titleMenu.textContent.trim() === ""){
+    menuRigth.style.display = "none"
+  }
+};
 
 const mostrarEnaoMostrar = () => {
   form.classList.toggle("hidden");
   editForm.classList.toggle("hidden");
   boxTarefa.classList.toggle("hidden");
+  tarefasFeitas.classList.toggle("hidden");
 };
 
 const editTarefas = (text) => {
-  const div = boxTarefa.querySelector(".tarefa");
-  const h3 = div.querySelector("h3");
+  const h3 = document.querySelectorAll(".tarefa h3");
 
-  h3.innerText = text;
+  h3.forEach((tarefa) => {
+    if (tarefa.textContent.trim() === oldvalvue) {
+      tarefa.textContent = text;
+    }
+  });
 
   arrTarefa = arrTarefa.map((item) => {
-    if (item.tarefa === oldvalvue) {
+    if (item.tarefa.trim() === oldvalvue) {
       item.tarefa = text;
       localStorage.myarr = JSON.stringify(arrTarefa);
     }
@@ -153,8 +159,12 @@ document.addEventListener("click", (e) => {
   }
 
   if (element.closest(".tarefa") || element.closest("h3")) {
-    menuLeft.classList.add("menu_view");
-    menuLeft.querySelector("nav h1").textContent = title;
+   const titleMenuRigth = menuRigth.querySelector("nav h1")
+   titleMenuRigth.textContent = title
+
+   if(titleMenuRigth.textContent.trim() === title){
+    menuRigth.style.display = "flex"
+   }
   }
 
   if (element.classList.contains("check")) {
@@ -212,13 +222,12 @@ editForm.addEventListener("submit", (e) => {
 });
 
 btnDelete.addEventListener("click", () => {
-  const tituloMenuDireita = menuLeft.querySelector("nav h1").textContent;
+  const tituloMenuDireita = menuRigth.querySelector("nav h1").textContent;
   const tituloTarefas = document.querySelectorAll(".tarefa h3");
 
   tituloTarefas.forEach((tarefas) => {
     if (tarefas.textContent.trim() === tituloMenuDireita.trim()) {
-      const tarefaPai = document.querySelector(".tarefa")
-      tarefaPai.remove()
+      tarefas.parentNode.remove();
     }
   });
 
@@ -231,14 +240,12 @@ btnDelete.addEventListener("click", () => {
 });
 
 btnEdit.addEventListener("click", () => {
-  const tituloMenuDireita = menuLeft.querySelector("nav h1").textContent;
+  const tituloMenuDireita = menuRigth.querySelector("nav h1").textContent;
 
   mostrarEnaoMostrar();
-  console.log(tituloMenuDireita);
 
-  editInput.value = tituloMenuDireita;
-  oldvalvue = tituloMenuDireita;
-  console.log(oldvalvue);
+  editInput.value = tituloMenuDireita.trim();
+  oldvalvue = tituloMenuDireita.trim();
 
   editInput.focus();
 });

@@ -151,17 +151,13 @@ button span {
 }
 
 .more_opition_for_tasks_rigth{  
-  display: none;
+  display: flex;
   flex: 0 1 320px;
   height: 100%;
   justify-content: center;
   background-color: var(--primare);
   color: white;
   padding: 16px;
-}
-
-.menu_view {
-  display: flex;
 }
 
 .more_opition_for_tasks_rigth nav {
