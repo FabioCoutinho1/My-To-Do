@@ -73,20 +73,16 @@ function carregarPagina() {
       tarefasFeitas.appendChild(div);
     }
   });
-  
-  setInterval(() => {
-    main.style.opacity = "1";
-  }, 500);
-  
+
   input.focus();
   mostrarMenuDireita();
 }
 
 const mostrarMenuDireita = () => {
-  const titleMenu = menuRigth.querySelector("nav h1")
-  console.log(typeof(titleMenu.textContent))
-  if(titleMenu.textContent.trim() === ""){
-    menuRigth.style.display = "none"
+  const titleMenu = menuRigth.querySelector("nav h1");
+  console.log(typeof titleMenu.textContent);
+  if (titleMenu.textContent.trim() === "") {
+    menuRigth.style.display = "none";
   }
 };
 
@@ -95,6 +91,10 @@ const mostrarEnaoMostrar = () => {
   editForm.classList.toggle("hidden");
   boxTarefa.classList.toggle("hidden");
   tarefasFeitas.classList.toggle("hidden");
+  cancalBtn.classList.toggle("hidden");
+  document.querySelector(".edit_form_buttons_save").classList.toggle("hidden")
+  btnDelete.classList.toggle("hidden")
+  btnEdit.classList.toggle("hidden")
 };
 
 const editTarefas = (text) => {
@@ -115,24 +115,24 @@ const editTarefas = (text) => {
   });
 };
 
-// const searchFunction = () => {
-//   if (search.value !== "") {
-//     for (let tarefa of tarefas) {
-//       let title = tarefa.querySelector("h3");
-//       title = title.textContent.toLowerCase();
-//       let textOfSearch = search.value.toLowerCase();
-//       if (!title.includes(textOfSearch)) {
-//         tarefa.style.display = "none";
-//       } else {
-//         tarefa.style.display = "flex";
-//       }
-//     }
-//   } else {
-//     for (let tarefa of tarefas) {
-//       tarefa.style.display = "flex";
-//     }
-//   }
-// };
+const searchFunction = () => {
+  if (search.value !== "") {
+    for (let tarefa of tarefas) {
+      let title = tarefa.querySelector("h3");
+      title = title.textContent.toLowerCase();
+      let textOfSearch = search.value.toLowerCase();
+      if (!title.includes(textOfSearch)) {
+        tarefa.style.display = "none";
+      } else {
+        tarefa.style.display = "flex";
+      }
+    }
+  } else {
+    for (let tarefa of tarefas) {
+      tarefa.style.display = "flex";
+    }
+  }
+};
 
 //enventos
 form.addEventListener("submit", (e) => {
@@ -159,12 +159,12 @@ document.addEventListener("click", (e) => {
   }
 
   if (element.closest(".tarefa") || element.closest("h3")) {
-   const titleMenuRigth = menuRigth.querySelector("nav h1")
-   titleMenuRigth.textContent = title
+    const titleMenuRigth = menuRigth.querySelector("nav h1");
+    titleMenuRigth.textContent = title;
 
-   if(titleMenuRigth.textContent.trim() === title){
-    menuRigth.style.display = "flex"
-   }
+    if (titleMenuRigth.textContent.trim() === title) {
+      menuRigth.style.display = "flex";
+    }
   }
 
   if (element.classList.contains("check")) {
@@ -249,4 +249,4 @@ btnEdit.addEventListener("click", () => {
 
   editInput.focus();
 });
-// search.addEventListener("input", searchFunction);
+search.addEventListener("input", searchFunction);

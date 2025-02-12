@@ -22,9 +22,6 @@ main {
   width: 100vw;
   height: 100vh;
   display: flex;
-
-  opacity: 0;
-  transition: transform 0.3s ease-out, opacity 1s ease-out;
 }
 
 .menu_nav_asside_left {
@@ -137,7 +134,6 @@ button span {
   padding: 16px;
   cursor: pointer;
   align-items: center;
-  opacity: 0;
   border-radius: 16px;
 }
 
@@ -193,16 +189,6 @@ button span {
   color: var(--text-corlos);
 }
 
-.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.remove {
-  transform: translateX(100%);
-  opacity: 0;
-}
-
 .tarefa h3 {
   font-size: 24px;
   font-weight: bold;
@@ -217,7 +203,7 @@ button span {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .trasition {

@@ -23,7 +23,7 @@
             <input
               type="text"
               name="search"
-              id="search"
+              id="search_tarefa"
               placeholder="Pesquisar"
             />
           </div>
@@ -56,18 +56,28 @@
           placeholder="Editar Tarefa"
           required
         />
-        <button type="submit">salvar</button>
-
-        <button id="cancel_btn">cancelar</button>
       </form>
 
       <aside class="more_opition_for_tasks_rigth">
         <nav>
           <h1></h1>
 
+          <button
+            class="edit_form_buttons_save hidden"
+            type="submit"
+            form="edit_form"
+          >
+            <span class="material-symbols-outlined"> save </span>salvar
+          </button>
+
+          <button class="hidden" id="cancel_btn">
+            <span class="material-symbols-outlined"> backspace </span>cancelar
+          </button>
+
           <button class="edit">
             <span class="material-symbols-outlined">edit</span>Editar Tarefa
           </button>
+
           <button class="delete">
             <span class="material-symbols-outlined">delete</span>Apagar Tarefa
           </button>
