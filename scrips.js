@@ -13,7 +13,6 @@ const tarefasFeitas = document.querySelector(".feitas");
 
 let arrTarefa = [];
 let tarefas = [];
-
 let oldvalvue = "";
 
 const criarTarefa = (text) => {
