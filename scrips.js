@@ -2,63 +2,31 @@ const form = document.querySelector("form");
 const editForm = document.querySelector("#edit_form");
 const input = document.querySelector("#id_tarefa");
 const editInput = document.querySelector("#id_tarefa_edit");
-const boxTarefa = document.querySelector(".mostrar");
+const divTarefas = document.querySelector(".mostrar");
+const tarefaFilha = document.querySelector(".tarefa");
 const cancalBtn = document.querySelector("#cancel_btn");
 const main = document.querySelector("main");
 const search = document.querySelector("#search_tarefa");
 const menuRigth = document.querySelector(".more_opition_for_tasks_rigth");
 const btnDelete = document.querySelector(".delete");
 const btnEdit = document.querySelector(".edit");
+const buttonSaveEdit = document.querySelector(".edit_form_buttons_save");
 const tarefasFeitas = document.querySelector(".feitas");
 
 let arrTarefa = [];
 let tarefas = [];
-let oldvalvue = "";
+let oldText = "";
 
-const criarTarefa = (text) => {
-  const divTarefa = document.createElement("div");
-  divTarefa.classList.add("tarefa");
-
-  boxTarefa.appendChild(divTarefa);
-
-  divTarefa.classList.add("visible");
-
-  const checkBtn = document.createElement("button");
-  checkBtn.classList.add("check");
-  checkBtn.innerHTML =
-    '<span class="material-symbols-outlined">radio_button_unchecked</span>';
-  divTarefa.appendChild(checkBtn);
-
-  const textoTarefa = document.createElement("h3");
-  textoTarefa.innerText = text;
-  divTarefa.appendChild(textoTarefa);
-
-  const divStar = document.createElement("div");
-  divStar.classList.add("star");
-  divStar.innerHTML = '<span class="material-symbols-outlined"> star </span>';
-  divTarefa.appendChild(divStar);
-
-  const editBtn = document.createElement("button");
-  editBtn.classList.add("edit");
-  editBtn.innerHTML = '<span class="material-symbols-outlined"> edit </span>';
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.classList.add("delete");
-  deleteBtn.innerHTML =
-    '<span class="material-symbols-outlined"> delete </span>';
-
-  tarefas.push(divTarefa);
-};
-
-const salvarNoLocalStorage = (data) => {
-  if (localStorage.myarr) {
-    arrTarefa = JSON.parse(localStorage.getItem("myarr"));
-  }
-
-  arrTarefa.push(data);
-  localStorage.myarr = JSON.stringify(arrTarefa);
-  return arrTarefa;
-};
+const arrayMostrarNaoMostrar = [
+  form,
+  editForm,
+  divTarefas,
+  tarefasFeitas,
+  cancalBtn,
+  buttonSaveEdit,
+  btnDelete,
+  btnEdit,
+];
 
 function carregarPagina() {
   if (localStorage.myarr) {
@@ -67,7 +35,7 @@ function carregarPagina() {
   arrTarefa.forEach((item) => {
     criarTarefa(item.tarefa);
     if (item.checked) {
-      const div = boxTarefa.lastElementChild;
+      const div = divTarefas.lastElementChild;
       div.classList.add("checked");
       tarefasFeitas.appendChild(div);
     }
@@ -77,40 +45,52 @@ function carregarPagina() {
   mostrarMenuDireita();
 }
 
+const criarTarefa = (text) => {
+  const tarefaClonada = tarefaFilha.cloneNode(true);
+  tarefaClonada.querySelector("h3").textContent = text;
+  tarefaClonada.style.display = "flex";
+  divTarefas.appendChild(tarefaClonada);
+};
+
+const salvarNoLocalStorage = (data) => {
+  if (localStorage.myarr) {
+    arrTarefa = JSON.parse(localStorage.getItem("myarr"));
+  }
+
+  arrTarefa.push(data);
+  localStorage.myarr = JSON.stringify(arrTarefa);
+};
+
 const mostrarMenuDireita = () => {
   const titleMenu = menuRigth.querySelector("nav h1");
-  console.log(typeof titleMenu.textContent);
   if (titleMenu.textContent.trim() === "") {
     menuRigth.style.display = "none";
   }
 };
 
 const mostrarEnaoMostrar = () => {
-  form.classList.toggle("hidden");
-  editForm.classList.toggle("hidden");
-  boxTarefa.classList.toggle("hidden");
-  tarefasFeitas.classList.toggle("hidden");
-  cancalBtn.classList.toggle("hidden");
-  document.querySelector(".edit_form_buttons_save").classList.toggle("hidden")
-  btnDelete.classList.toggle("hidden")
-  btnEdit.classList.toggle("hidden")
+  arrayMostrarNaoMostrar.forEach((element) => {
+    element.classList.toggle("hidden");
+  });
 };
 
-const editTarefas = (text) => {
+const editTarefaDom = (text) => {
   const h3 = document.querySelectorAll(".tarefa h3");
 
   h3.forEach((tarefa) => {
-    if (tarefa.textContent.trim() === oldvalvue) {
+    if (tarefa.textContent.trim() === oldText) {
       tarefa.textContent = text;
     }
   });
+};
 
-  arrTarefa = arrTarefa.map((item) => {
-    if (item.tarefa.trim() === oldvalvue) {
-      item.tarefa = text;
-      localStorage.myarr = JSON.stringify(arrTarefa);
+const editarTarefaStorage = (text) => {
+  arrTarefa.map((element) => {
+    if (element.tarefa.trim() === oldText) {
+      element.tarefa = text;
     }
-    return item;
+
+    localStorage.setItem("myarr", JSON.stringify(arrTarefa));
   });
 };
 
@@ -133,10 +113,31 @@ const searchFunction = () => {
   }
 };
 
+const marcarTarefaFeita = (botaDinamico, title) => {
+  const paiBotao = botaDinamico.parentNode;
+  paiBotao.classList.toggle("checked");
+
+  if (paiBotao.classList.contains("checked")) {
+    tarefasFeitas.appendChild(paiBotao);
+    botaDinamico.innerHTML = `<span class="material-symbols-outlined"> radio_button_checked </span>`;
+  } else {
+    divTarefas.appendChild(paiBotao);
+    botaDinamico.innerHTML = `<span class="material-symbols-outlined"> radio_button_unchecked </span>`;
+  }
+
+  arrTarefa = arrTarefa.map((element) => {
+    if (element.tarefa === title) {
+      element.checked = true;
+      localStorage.setItem("myarr", JSON.stringify(arrTarefa));
+    }
+  });
+};
+
 //enventos
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const formData = new FormData(form);
+  formData.append("checked", false);
   const data = Object.fromEntries(formData);
 
   const { tarefa } = data;
@@ -166,39 +167,8 @@ document.addEventListener("click", (e) => {
     }
   }
 
-  if (element.classList.contains("check")) {
-    parent.classList.toggle("checked");
-
-    if (parent.classList.contains("checked")) {
-      tarefasFeitas.appendChild(parent);
-      parent.querySelector(
-        "button"
-      ).innerHTML = `<span class="material-symbols-outlined"> radio_button_checked </span>`;
-
-      arrTarefa = arrTarefa.map((item) => {
-        if (item.tarefa === title) {
-          item.checked = true;
-          localStorage.myarr = JSON.stringify(arrTarefa);
-          if (item.checked === true) {
-            tarefasFeitas.appendChild(parent);
-          }
-        }
-        return item;
-      });
-    } else {
-      boxTarefa.appendChild(parent);
-
-      parent.querySelector("button").innerHTML =
-        '<span class="material-symbols-outlined">radio_button_unchecked</span>';
-
-      arrTarefa = arrTarefa.map((item) => {
-        if (item.tarefa === title) {
-          item.checked = false;
-          localStorage.myarr = JSON.stringify(arrTarefa);
-        }
-        return item;
-      });
-    }
+  if (element.classList.contains("btn_checkd")) {
+    marcarTarefaFeita(element, title);
   }
 });
 
@@ -214,7 +184,8 @@ editForm.addEventListener("submit", (e) => {
   const editInputValue = editInput.value;
 
   if (editInputValue) {
-    editTarefas(editInputValue);
+    editTarefaDom(editInputValue);
+    editarTarefaStorage(editInputValue);
   }
 
   mostrarEnaoMostrar();
@@ -230,22 +201,10 @@ btnDelete.addEventListener("click", () => {
     }
   });
 
-  setTimeout(() => {
-    arrTarefa = arrTarefa.filter(
-      (item) => item.tarefa.trim() !== tituloMenuDireita
-    );
-    localStorage.myarr = JSON.stringify(arrTarefa);
-  }, 500);
+  arrTarefa = arrTarefa.filter(
+    (item) => item.tarefa.trim() !== tituloMenuDireita
+  );
+  localStorage.myarr = JSON.stringify(arrTarefa);
 });
 
-btnEdit.addEventListener("click", () => {
-  const tituloMenuDireita = menuRigth.querySelector("nav h1").textContent;
-
-  mostrarEnaoMostrar();
-
-  editInput.value = tituloMenuDireita.trim();
-  oldvalvue = tituloMenuDireita.trim();
-
-  editInput.focus();
-});
 search.addEventListener("input", searchFunction);

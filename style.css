@@ -74,7 +74,7 @@ main {
   padding: 16px;
 }
 
-.feitas p{
+.feitas p {
   color: white;
 }
 
@@ -114,11 +114,9 @@ button {
   border: none;
 }
 
-button span {
-  pointer-events: none;
+span {
   color: white;
-  font-size: 24px;
-  font-weight: bold;
+  pointer-events: none;
 }
 
 .mostrar {
@@ -129,7 +127,7 @@ button span {
 
 .tarefa {
   background-color: var(--primare);
-  display: flex;
+  display: none;
   gap: 16px;
   padding: 16px;
   cursor: pointer;
@@ -142,11 +140,11 @@ button span {
   color: var(--text-corlos);
 }
 
-.tarefa .favorit{
+.tarefa .favorit {
   color: yellow;
 }
 
-.more_opition_for_tasks_rigth{  
+.more_opition_for_tasks_rigth {
   display: flex;
   flex: 0 1 320px;
   height: 100%;
@@ -164,9 +162,6 @@ button span {
   gap: 20px;
 }
 
-.more_opition_for_tasks_rigth h1{
-  padding: 25px;
-}
 
 .more_opition_for_tasks_rigth button {
   display: flex;
@@ -185,7 +180,7 @@ button span {
   color: var(--text-corlos);
 }
 
-.more_opition_for_tasks_rigth button span{
+.more_opition_for_tasks_rigth button span {
   color: var(--text-corlos);
 }
 
@@ -209,7 +204,6 @@ button span {
 .trasition {
   transition: all 0.5s ease;
 }
-
 
 @media screen and (max-width: 600px) {
   body {
