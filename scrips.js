@@ -115,9 +115,9 @@ const searchFunction = () => {
 
 const marcarTarefaFeita = (botaDinamico, title) => {
   const paiBotao = botaDinamico.parentNode;
-  paiBotao.classList.toggle("checked");
+  const estaMaracado = paiBotao.classList.toggle("checked");
 
-  if (paiBotao.classList.contains("checked")) {
+  if (estaMaracado) {
     tarefasFeitas.appendChild(paiBotao);
     botaDinamico.innerHTML = `<span class="material-symbols-outlined"> radio_button_checked </span>`;
   } else {
@@ -125,12 +125,15 @@ const marcarTarefaFeita = (botaDinamico, title) => {
     botaDinamico.innerHTML = `<span class="material-symbols-outlined"> radio_button_unchecked </span>`;
   }
 
+  arrTarefa = JSON.parse(localStorage.getItem("myarr"));
   arrTarefa = arrTarefa.map((element) => {
     if (element.tarefa === title) {
-      element.checked = true;
-      localStorage.setItem("myarr", JSON.stringify(arrTarefa));
+      return { ...element, checked: estaMaracado };
     }
+    return element;
   });
+
+  localStorage.setItem("myarr", JSON.stringify(arrTarefa));
 };
 
 //enventos
