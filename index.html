@@ -14,7 +14,7 @@
 
   <body onload="carregarPagina();">
     <main>
-      <aside class="menu_nav_asside_left">
+      <aside class="menu_left">
         <nav>
           <div class="input_search">
             <label for="search">
@@ -23,16 +23,17 @@
             <input
               type="text"
               name="search"
-              id="search_tarefa"
+              id="search_task"
               placeholder="Pesquisar"
             />
           </div>
         </nav>
       </aside>
-      <section class="main_mid_tasks">
-        <div class="mostrar">
-          <div class="tarefa">
-            <button class="btn_checkd">
+
+      <section class="mid_task">
+        <div class="box_tasks">
+          <div class="task" style="display: none;">
+            <button class="btn_done">
               <span class="material-symbols-outlined">
                 radio_button_unchecked
               </span>
@@ -43,17 +44,17 @@
             </div>
           </div>
         </div>
-        <div class="mostrar feitas">
+        <div class="box_tasks done">
           <p>Tarefas feitas</p>
         </div>
-        <form>
-          <button type="submit" class="button_add">
+        <form class="form_add">
+          <button type="submit" class="btn_add">
             <span class="material-symbols-outlined"> add </span>
           </button>
           <input
             type="text"
-            name="tarefa"
-            id="id_tarefa"
+            name="task"
+            id="id_task"
             placeholder="Adicionar Tarefa"
             required
           />
@@ -61,37 +62,39 @@
         <form id="edit_form" class="hidden">
           <input
             type="text"
-            name="tarefa_edit"
-            id="id_tarefa_edit"
+            name="task_edit"
+            id="id_task_edit"
             placeholder="Editar Tarefa"
             required
           />
         </form>
       </section>
 
-      <aside class="more_opition_for_tasks_rigth">
+      <aside class="menu_rigth">
         <nav>
-          <h1></h1>
+          <div class="close_menu">
+            <span class="material-symbols-outlined" id="btn_close_menu">
+              close
+            </span>
+          </div>
+          <div class="title">
+            <h1></h1>
+          </div>
 
-          <button
-            class="edit_form_buttons_save hidden"
-            type="submit"
-            form="edit_form"
-          >
-            <span class="material-symbols-outlined"> save </span>salvar
-          </button>
-
-          <button class="hidden" id="cancel_btn">
-            <span class="material-symbols-outlined"> backspace </span>cancelar
-          </button>
-
-          <button class="edit">
-            <span class="material-symbols-outlined">edit</span>Editar Tarefa
-          </button>
-
-          <button class="delete">
-            <span class="material-symbols-outlined">delete</span>Apagar Tarefa
-          </button>
+          <div class="btns_menu_rigth">
+            <button class="btn_save_edit hidden" type="submit" form="edit_form">
+              <span class="material-symbols-outlined"> save </span>salvar
+            </button>
+            <button class="btn_cancel hidden">
+              <span class="material-symbols-outlined"> backspace </span>cancelar
+            </button>
+            <button class="btn_edit">
+              <span class="material-symbols-outlined">edit</span>Editar Tarefa
+            </button>
+            <button class="btn_delete">
+              <span class="material-symbols-outlined">delete</span>Apagar Tarefa
+            </button>
+          </div>
         </nav>
       </aside>
     </main>

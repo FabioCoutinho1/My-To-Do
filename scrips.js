@@ -1,20 +1,19 @@
 const form = document.querySelector("form");
 const editForm = document.querySelector("#edit_form");
-const input = document.querySelector("#id_tarefa");
-const editInput = document.querySelector("#id_tarefa_edit");
-const divTarefas = document.querySelector(".mostrar");
-const tarefaFilha = document.querySelector(".tarefa");
-const cancalBtn = document.querySelector("#cancel_btn");
-const main = document.querySelector("main");
-const search = document.querySelector("#search_tarefa");
-const menuRigth = document.querySelector(".more_opition_for_tasks_rigth");
-const btnDelete = document.querySelector(".delete");
-const btnEdit = document.querySelector(".edit");
-const buttonSaveEdit = document.querySelector(".edit_form_buttons_save");
-const tarefasFeitas = document.querySelector(".feitas");
+const input = document.querySelector("#id_task");
+const editInput = document.querySelector("#id_task_edit");
+const divTarefas = document.querySelector(".box_tasks");
+const tarefaFilha = document.querySelector(".task");
+const cancalBtn = document.querySelector(".btn_cancel");
+const search = document.querySelector("#search_task");
+const menuRigth = document.querySelector(".menu_rigth");
+const btnDelete = document.querySelector(".btn_delete");
+const btnEdit = document.querySelector(".btn_edit");
+const buttonSaveEdit = document.querySelector(".btn_save_edit");
+const tarefasFeitas = document.querySelector(".done");
+const btnCloseMenu = document.querySelector("#btn_close_menu");
 
 let arrTarefa = [];
-let tarefas = [];
 let oldText = "";
 
 const arrayMostrarNaoMostrar = [
@@ -33,11 +32,14 @@ function carregarPagina() {
     arrTarefa = JSON.parse(localStorage.getItem("myarr"));
   }
   arrTarefa.forEach((item) => {
-    criarTarefa(item.tarefa);
+    criarTarefa(item.task);
     if (item.checked) {
       const div = divTarefas.lastElementChild;
       div.classList.add("checked");
       tarefasFeitas.appendChild(div);
+      div.querySelector(
+        "button"
+      ).innerHTML = `<span class="material-symbols-outlined"> radio_button_checked </span>`;
     }
   });
 
@@ -75,19 +77,19 @@ const mostrarEnaoMostrar = () => {
 };
 
 const editTarefaDom = (text) => {
-  const h3 = document.querySelectorAll(".tarefa h3");
+  const h3 = divTarefas.querySelectorAll(".task h3");
 
-  h3.forEach((tarefa) => {
-    if (tarefa.textContent.trim() === oldText) {
-      tarefa.textContent = text;
+  h3.forEach((task) => {
+    if (task.textContent.trim() === oldText) {
+      task.textContent = text;
     }
   });
 };
 
 const editarTarefaStorage = (text) => {
   arrTarefa.map((element) => {
-    if (element.tarefa.trim() === oldText) {
-      element.tarefa = text;
+    if (element.task.trim() === oldText) {
+      element.task = text;
     }
 
     localStorage.setItem("myarr", JSON.stringify(arrTarefa));
@@ -96,19 +98,19 @@ const editarTarefaStorage = (text) => {
 
 const searchFunction = () => {
   if (search.value !== "") {
-    for (let tarefa of tarefas) {
-      let title = tarefa.querySelector("h3");
+    for (let task of tarefas) {
+      let title = task.querySelector("h3");
       title = title.textContent.toLowerCase();
       let textOfSearch = search.value.toLowerCase();
       if (!title.includes(textOfSearch)) {
-        tarefa.style.display = "none";
+        task.style.display = "none";
       } else {
-        tarefa.style.display = "flex";
+        task.style.display = "flex";
       }
     }
   } else {
-    for (let tarefa of tarefas) {
-      tarefa.style.display = "flex";
+    for (let task of tarefas) {
+      task.style.display = "flex";
     }
   }
 };
@@ -127,7 +129,7 @@ const marcarTarefaFeita = (botaDinamico, title) => {
 
   arrTarefa = JSON.parse(localStorage.getItem("myarr"));
   arrTarefa = arrTarefa.map((element) => {
-    if (element.tarefa === title) {
+    if (element.task === title) {
       return { ...element, checked: estaMaracado };
     }
     return element;
@@ -139,12 +141,13 @@ const marcarTarefaFeita = (botaDinamico, title) => {
 //enventos
 form.addEventListener("submit", (e) => {
   e.preventDefault();
-  const formData = new FormData(form);
-  formData.append("checked", false);
-  const data = Object.fromEntries(formData);
+  const data = {
+    task: input.value.trim(),
+    checked: false,
+  };
 
-  const { tarefa } = data;
-  criarTarefa(tarefa);
+  const { task } = data;
+  criarTarefa(task);
   salvarNoLocalStorage(data);
 
   input.value = "";
@@ -161,7 +164,7 @@ document.addEventListener("click", (e) => {
     title = parent.querySelector("div h3").innerText;
   }
 
-  if (element.closest(".tarefa") || element.closest("h3")) {
+  if (element.closest(".task") || element.closest("h3")) {
     const titleMenuRigth = menuRigth.querySelector("nav h1");
     titleMenuRigth.textContent = title;
 
@@ -170,7 +173,7 @@ document.addEventListener("click", (e) => {
     }
   }
 
-  if (element.classList.contains("btn_checkd")) {
+  if (element.classList.contains("btn_done")) {
     marcarTarefaFeita(element, title);
   }
 });
@@ -183,7 +186,6 @@ cancalBtn.addEventListener("click", (e) => {
 
 editForm.addEventListener("submit", (e) => {
   e.preventDefault();
-
   const editInputValue = editInput.value;
 
   if (editInputValue) {
@@ -196,7 +198,7 @@ editForm.addEventListener("submit", (e) => {
 
 btnDelete.addEventListener("click", () => {
   const tituloMenuDireita = menuRigth.querySelector("nav h1").textContent;
-  const tituloTarefas = document.querySelectorAll(".tarefa h3");
+  const tituloTarefas = document.querySelectorAll(".task h3");
 
   tituloTarefas.forEach((tarefas) => {
     if (tarefas.textContent.trim() === tituloMenuDireita.trim()) {
@@ -205,9 +207,24 @@ btnDelete.addEventListener("click", () => {
   });
 
   arrTarefa = arrTarefa.filter(
-    (item) => item.tarefa.trim() !== tituloMenuDireita
+    (item) => item.task.trim() !== tituloMenuDireita
   );
   localStorage.myarr = JSON.stringify(arrTarefa);
 });
 
+btnEdit.addEventListener("click", () => {
+  const tituloMenuDireita = menuRigth.querySelector("nav h1").textContent;
+
+  mostrarEnaoMostrar();
+
+  editInput.value = tituloMenuDireita.trim();
+  oldText = tituloMenuDireita.trim();
+
+  editInput.focus();
+});
+
 search.addEventListener("input", searchFunction);
+
+btnCloseMenu.addEventListener("click", () => {
+  menuRigth.style.display = "none";
+});
