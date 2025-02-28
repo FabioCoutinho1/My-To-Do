@@ -239,7 +239,6 @@ btnSandwich.forEach((element) => {
     e.stopPropagation();
     menuLeft.classList.toggle("hidden");
     menuMid.classList.toggle("overlay");
-
   });
 });
 
@@ -252,4 +251,5 @@ document.addEventListener("click", (e) => {
 
 window.visualViewport.addEventListener("resize", () => {
   main.style.height = `${window.visualViewport.height}px`;
+  main.style.overflow = "hidden";
 });
