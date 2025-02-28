@@ -7,14 +7,19 @@ const tarefaFilha = document.querySelector(".task");
 const cancalBtn = document.querySelector(".btn_cancel");
 const search = document.querySelector("#search_task");
 const menuRigth = document.querySelector(".menu_rigth");
+const menuLeft = document.querySelector(".menu_left");
+const menuMid = document.querySelector(".mid_task");
 const btnDelete = document.querySelector(".btn_delete");
 const btnEdit = document.querySelector(".btn_edit");
 const buttonSaveEdit = document.querySelector(".btn_save_edit");
 const tarefasFeitas = document.querySelector(".done");
 const btnCloseMenu = document.querySelector("#btn_close_menu");
+const btnSandwich = document.querySelectorAll(".btn_sandwich");
 
 let arrTarefa = [];
+let tarefas = [];
 let oldText = "";
+let titleTask;
 
 const arrayMostrarNaoMostrar = [
   form,
@@ -44,7 +49,6 @@ function carregarPagina() {
   });
 
   input.focus();
-  mostrarMenuDireita();
 }
 
 const criarTarefa = (text) => {
@@ -63,10 +67,10 @@ const salvarNoLocalStorage = (data) => {
   localStorage.myarr = JSON.stringify(arrTarefa);
 };
 
-const mostrarMenuDireita = () => {
+const mostrarMenuDireita = (text) => {
   const titleMenu = menuRigth.querySelector("nav h1");
-  if (titleMenu.textContent.trim() === "") {
-    menuRigth.style.display = "none";
+  if (titleMenu.textContent.trim() === text) {
+    menuRigth.classList.toggle("hidden");
   }
 };
 
@@ -84,6 +88,8 @@ const editTarefaDom = (text) => {
       task.textContent = text;
     }
   });
+
+  menuRigth.querySelector("nav h1").textContent = text;
 };
 
 const editarTarefaStorage = (text) => {
@@ -158,23 +164,22 @@ document.addEventListener("click", (e) => {
   const element = e.target;
   const parent = element.closest("div");
 
-  let title;
-
   if (parent && parent.querySelector("div h3")) {
-    title = parent.querySelector("div h3").innerText;
+    titleTask = parent.querySelector("div h3").innerText;
   }
 
-  if (element.closest(".task") || element.closest("h3")) {
+  if (element.classList.contains(".task") || element.closest("h3")) {
+    console.log(element);
     const titleMenuRigth = menuRigth.querySelector("nav h1");
-    titleMenuRigth.textContent = title;
+    titleMenuRigth.textContent = titleTask;
 
-    if (titleMenuRigth.textContent.trim() === title) {
-      menuRigth.style.display = "flex";
+    if (titleMenuRigth.textContent.trim() === titleTask) {
+      mostrarMenuDireita(titleTask);
     }
   }
 
   if (element.classList.contains("btn_done")) {
-    marcarTarefaFeita(element, title);
+    marcarTarefaFeita(element, titleTask);
   }
 });
 
@@ -210,6 +215,8 @@ btnDelete.addEventListener("click", () => {
     (item) => item.task.trim() !== tituloMenuDireita
   );
   localStorage.myarr = JSON.stringify(arrTarefa);
+
+  mostrarMenuDireita(titleTask);
 });
 
 btnEdit.addEventListener("click", () => {
@@ -226,5 +233,13 @@ btnEdit.addEventListener("click", () => {
 search.addEventListener("input", searchFunction);
 
 btnCloseMenu.addEventListener("click", () => {
-  menuRigth.style.display = "none";
+  menuRigth.classList.toggle("hidden");
+});
+
+btnSandwich.forEach((element) => {
+  element.addEventListener("click", () => {
+    menuLeft.classList.toggle("hidden");
+    menuMid.classList.toggle("overlay")
+  });
+
 });
