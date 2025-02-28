@@ -155,6 +155,8 @@ form{
 .mid_task .form_add {
   display: flex;
   position: relative;
+  position: fixed;
+  bottom: 5px;
 }
 
 .mid_task .form_add input {
