@@ -103,21 +103,18 @@ const editarTarefaStorage = (text) => {
 };
 
 const searchFunction = () => {
+  const tasks = menuMid.querySelectorAll(".task h3");
   if (search.value !== "") {
-    for (let task of tarefas) {
-      let title = task.querySelector("h3");
-      title = title.textContent.toLowerCase();
-      let textOfSearch = search.value.toLowerCase();
-      if (!title.includes(textOfSearch)) {
-        task.style.display = "none";
-      } else {
-        task.style.display = "flex";
+    console.log(tasks);
+    tasks.forEach((element, idx) => {
+      if (!element.textContent.includes(search.value)) {
+        element.parentNode.classList.add("hidden");
       }
-    }
+    });
   } else {
-    for (let task of tarefas) {
-      task.style.display = "flex";
-    }
+    tasks.forEach((element) => {
+      element.parentNode.classList.remove("hidden");
+    });
   }
 };
 
@@ -239,7 +236,7 @@ btnCloseMenu.addEventListener("click", () => {
 btnSandwich.forEach((element) => {
   element.addEventListener("click", () => {
     menuLeft.classList.toggle("hidden");
-    menuMid.classList.toggle("overlay")
+    menuMid.classList.toggle("overlay");
   });
-
 });
+
