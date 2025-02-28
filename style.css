@@ -15,21 +15,18 @@
   --task-done: rgba(84, 84, 84, 0.71);
 }
 
-body{
+body {
   height: 100dvh;
   width: 100dvw;
-  
 }
 
 main {
   font-size: 1.6rem;
   display: flex;
 
-  height: 100dvh;
-  width: 100%;
+  height: 100%;
 
   position: relative;
-
 }
 
 input {
@@ -49,7 +46,7 @@ input:focus {
   border-bottom: 3px solid blue;
 }
 
-form{
+form {
   display: flex;
 }
 
@@ -65,7 +62,9 @@ form{
 /* left */
 .menu_left {
   flex-direction: column;
+
   flex: 0 0;
+  padding: 1rem;
 
   z-index: 1;
 
@@ -75,13 +74,10 @@ form{
   overflow: hidden;
 
   background-color: rgb(51, 51, 51);
-
 }
 
 .input_search {
   display: flex;
-
-  padding: 1rem;
 }
 
 .input_search input {
@@ -118,7 +114,7 @@ form{
   padding: 10px;
 }
 
-.btn_sandwich{
+.btn_sandwich {
   cursor: pointer;
 }
 
@@ -132,7 +128,7 @@ form{
   align-items: center;
   gap: 1rem;
 
-  padding: .5rem;
+  padding: 0.5rem;
   height: 5rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
@@ -155,8 +151,6 @@ form{
 .mid_task .form_add {
   display: flex;
   position: relative;
-  position: fixed;
-  bottom: 5px;
 }
 
 .mid_task .form_add input {
@@ -177,7 +171,7 @@ form{
 /* fim mid */
 
 /* rigth */
-.menu_rigth{
+.menu_rigth {
   flex: 0 0 300px;
   background-color: rgb(51, 51, 51);
 
@@ -214,30 +208,30 @@ form{
   border-radius: 0.5rem;
 }
 
-.close_menu{
+.close_menu {
   text-align: right;
 }
 
-.close_menu span{
+.close_menu span {
   cursor: pointer;
 }
 /* fim rigth */
 
 /* utilitarios */
 
-.overlay{
-  filter: brightness(.4) blur(.3rem);
+.overlay {
+  filter: brightness(0.4) blur(0.3rem);
 }
 
 .hidden {
   display: none !important;
 }
-.checked{
+.checked {
   background-color: rgb(100, 100, 100);
 }
 
-.checked h3{
-  text-decoration: line-through .3rem ;
+.checked h3 {
+  text-decoration: line-through 0.3rem;
 }
 button span {
   pointer-events: none;

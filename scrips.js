@@ -1,4 +1,5 @@
 const form = document.querySelector("form");
+const main = document.querySelector("main");
 const editForm = document.querySelector("#edit_form");
 const input = document.querySelector("#id_task");
 const editInput = document.querySelector("#id_task_edit");
@@ -234,12 +235,21 @@ btnCloseMenu.addEventListener("click", () => {
 });
 
 btnSandwich.forEach((element) => {
-  element.addEventListener("click", () => {
+  element.addEventListener("click", (e) => {
+    e.stopPropagation();
     menuLeft.classList.toggle("hidden");
     menuMid.classList.toggle("overlay");
+
   });
 });
 
-window.addEventListener("resize", () => {
-  document.body.style.height = `${window.innerHeight}px`;
+document.addEventListener("click", (e) => {
+  if (!e.target.contains(menuLeft) && e.target !== btnSandwich) {
+    menuLeft.classList.add("hidden");
+    menuMid.classList.remove("overlay");
+  }
+});
+
+window.visualViewport.addEventListener("resize", () => {
+  main.style.height = `${window.visualViewport.height}px`;
 });
