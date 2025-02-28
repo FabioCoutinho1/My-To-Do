@@ -2,18 +2,21 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <link rel="stylesheet" href="style.css" />
     <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
-      />
-      <script src="scrips.js" defer></script>
-      <title>TODO</title>
-    </head>
-    
-    <body onload="carregarPagina();">
-      <main>
+    />
+    <script src="scrips.js" defer></script>
+    <title>TODO</title>
+  </head>
+
+  <body onload="carregarPagina();">
+    <main>
       <aside class="menu_left hidden">
         <nav>
           <div>
@@ -34,42 +37,41 @@
       </aside>
 
       <section class="mid_task">
-          <header>
-            <div>
-              <span class="material-symbols-outlined btn_sandwich"> menu </span>
-            </div>
-            <h1>Meu Dia</h1>
-          </header>
-          <div class="box_tasks">
-            <div class="task" style="display: none">
-              <button class="btn_done">
-                <span class="material-symbols-outlined">
-                  radio_button_unchecked
-                </span>
-              </button>
-              <h3>exemplo</h3>
-              <div class="star">
-                <span class="material-symbols-outlined">star</span>
-              </div>
-            </div>
+        <header>
+          <div>
+            <span class="material-symbols-outlined btn_sandwich"> menu </span>
           </div>
-          <div class="box_tasks done">
-            <p>Tarefas feitas</p>
-          </div>
-          <form class="form_add">
-            <button type="submit" class="btn_add">
-              <span class="material-symbols-outlined"> add </span>
+          <h1>Meu Dia</h1>
+        </header>
+        <div class="box_tasks">
+          <div class="task" style="display: none">
+            <button class="btn_done">
+              <span class="material-symbols-outlined">
+                radio_button_unchecked
+              </span>
             </button>
-            <input
-              type="text"
-              name="task"
-              id="id_task"
-              placeholder="Adicionar Tarefa"
-              required
-            />
-          </form>
-        </section>
-      
+            <h3>exemplo</h3>
+            <div class="star">
+              <span class="material-symbols-outlined">star</span>
+            </div>
+          </div>
+        </div>
+        <div class="box_tasks done">
+          <p>Tarefas feitas</p>
+        </div>
+        <form class="form_add">
+          <button type="submit" class="btn_add">
+            <span class="material-symbols-outlined"> add </span>
+          </button>
+          <input
+            type="text"
+            name="task"
+            id="id_task"
+            placeholder="Adicionar Tarefa"
+            required
+          />
+        </form>
+      </section>
 
       <aside class="menu_rigth hidden">
         <nav>
