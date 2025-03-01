@@ -64,7 +64,7 @@ button {
   width: 50%;
   overflow: hidden;
 
-  background-color: rgb(51, 51, 51);
+  background-color: rgba(39, 39, 39, 1);
 }
 
 .input_search {
@@ -158,12 +158,14 @@ button {
   width: 5rem;
 
   position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
 }
 /* fim mid */
 
 /* rigth */
 .menu_rigth {
-  background-color: rgb(51, 51, 51);
+  background-color: rgba(39, 39, 39, 1);
 
   position: absolute;
   height: 100%;
@@ -189,12 +191,20 @@ button {
 .btns_menu_rigth button {
   align-items: center;
   gap: 1rem;
+  background-color: rgba(50, 50, 50, 1);
+  border: 0.1rem solid black;
 
-  background-color: rgb(100, 100, 100);
+  border: none;
   color: white;
   font-size: 2rem;
   padding: 1rem;
   border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color .3s ease;
+}
+
+.btns_menu_rigth button:hover {
+  background-color: rgba(60, 60, 60, 1);
 }
 
 .close_menu {
@@ -209,7 +219,7 @@ button {
 /* utilitarios */
 
 .overlay {
-  filter: brightness(0.4) blur(0.3rem);
+  filter: brightness(0.4) ;
 }
 
 .hidden {
@@ -235,7 +245,6 @@ button span {
   }
 
   .menu_rigth {
-    display: flex;
     position: static;
     flex: 0 0 300px;
   }
@@ -245,6 +254,6 @@ button span {
   }
 
   .overlay {
-    filter:none;
+    filter: none;
   }
 }

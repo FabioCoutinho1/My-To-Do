@@ -25,8 +25,6 @@ let titleTask;
 const arrayMostrarNaoMostrar = [
   form,
   editForm,
-  divTarefas,
-  tarefasFeitas,
   cancalBtn,
   buttonSaveEdit,
   btnDelete,
@@ -71,7 +69,7 @@ const salvarNoLocalStorage = (data) => {
 const mostrarMenuDireita = (text) => {
   const titleMenu = menuRigth.querySelector("nav h1");
   if (titleMenu.textContent.trim() === text) {
-    menuRigth.classList.toggle("hidden");
+    menuRigth.classList.remove("hidden");
   }
 };
 
@@ -166,7 +164,7 @@ document.addEventListener("click", (e) => {
     titleTask = parent.querySelector("div h3").innerText;
   }
 
-  if (element.classList.contains(".task") || element.closest("h3")) {
+  if (element.classList.contains("task") || element.closest("h3")) {
     console.log(element);
     const titleMenuRigth = menuRigth.querySelector("nav h1");
     titleMenuRigth.textContent = titleTask;
@@ -243,9 +241,13 @@ btnSandwich.forEach((element) => {
 });
 
 document.addEventListener("click", (e) => {
-  if (!e.target.contains(menuLeft) && e.target !== btnSandwich) {
+  const element = e.target;
+  if (
+    !element.contains(menuLeft) &&
+    element !== btnSandwich &&
+    !element.contains(search)
+  ) {
     menuLeft.classList.add("hidden");
     menuMid.classList.remove("overlay");
   }
 });
-
