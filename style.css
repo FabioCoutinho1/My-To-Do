@@ -10,17 +10,12 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-body {
-}
-
 main {
   overflow: hidden !important;
   font-size: 1.6rem;
   display: flex;
   position: relative;
   height: 100dvh;
-
 }
 
 input {
@@ -41,6 +36,9 @@ input:focus {
 }
 
 form {
+  display: flex;
+}
+button {
   display: flex;
 }
 
@@ -189,7 +187,6 @@ form {
 }
 
 .btns_menu_rigth button {
-  display: flex;
   align-items: center;
   gap: 1rem;
 
@@ -216,7 +213,7 @@ form {
 }
 
 .hidden {
-  display: none !important;
+  display: none;
 }
 .checked {
   background-color: rgb(100, 100, 100);
@@ -227,4 +224,27 @@ form {
 }
 button span {
   pointer-events: none;
+}
+
+@media screen and (min-width: 950px) {
+  .menu_left {
+    position: static;
+    display: flex;
+
+    flex: 0 0 300px;
+  }
+
+  .menu_rigth {
+    display: flex;
+    position: static;
+    flex: 0 0 300px;
+  }
+
+  .btn_sandwich {
+    display: none !important;
+  }
+
+  .overlay {
+    filter:none;
+  }
 }
