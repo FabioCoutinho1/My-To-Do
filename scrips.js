@@ -69,10 +69,10 @@ const salvarNoLocalStorage = (data) => {
 const mostrarMenuDireita = (text) => {
   const titleMenu = menuRigth.querySelector("nav h1");
   if (titleMenu.textContent.trim() === text) {
-    menuRigth.style.right = "0px"
-    setTimeout(()=>{
-      menuMid.style.marginRight = "300px"
-    },200)
+    menuRigth.style.right = "0px";
+    setTimeout(() => {
+      menuMid.style.marginRight = "300px";
+    }, 200);
   }
 };
 
@@ -110,12 +110,12 @@ const searchFunction = () => {
     console.log(tasks);
     tasks.forEach((element) => {
       if (!element.textContent.includes(search.value)) {
-        element.parentNode.classList.add("hidden");
+        element.parentNode.style.display = "none";
       }
     });
   } else {
     tasks.forEach((element) => {
-      element.parentNode.classList.remove("hidden");
+      element.parentNode.style.display = "flex";
     });
   }
 };
@@ -209,13 +209,13 @@ btnDelete.addEventListener("click", () => {
       tarefas.parentNode.remove();
     }
   });
-
+  
   arrTarefa = arrTarefa.filter(
     (item) => item.task.trim() !== tituloMenuDireita
   );
   localStorage.myarr = JSON.stringify(arrTarefa);
-
   mostrarMenuDireita(titleTask);
+
 });
 
 btnEdit.addEventListener("click", () => {
@@ -232,10 +232,8 @@ btnEdit.addEventListener("click", () => {
 search.addEventListener("input", searchFunction);
 
 btnCloseMenu.addEventListener("click", () => {
-  menuRigth.style.right = "-100%"
-  menuMid.style.marginRight = "0"
-
-  
+  menuRigth.style.right = "-100%";
+  menuMid.style.marginRight = "0";
 });
 
 btnSandwich.addEventListener("click", () => {
