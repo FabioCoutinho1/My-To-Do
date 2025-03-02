@@ -60,11 +60,13 @@ button {
 
   position: absolute;
 
+  left: -100%;
   height: 100%;
   width: 50%;
   overflow: hidden;
 
   background-color: rgba(39, 39, 39, 1);
+  transition:left .5s;
 }
 
 .input_search {
@@ -105,7 +107,8 @@ button {
   padding: 10px;
 }
 
-.btn_sandwich {
+.btn_sandwich_open,
+.btn_sandwich_close {
   cursor: pointer;
 }
 
@@ -170,6 +173,9 @@ button {
   position: absolute;
   height: 100%;
   width: 100%;
+  right: -100%;
+  
+  transition: right .2s;
 }
 
 .menu_rigth nav {
@@ -245,11 +251,13 @@ button span {
   }
 
   .menu_rigth {
-    position: static;
-    flex: 0 0 300px;
+    width: 300px;
+    
+    right: -100%;
   }
 
-  .btn_sandwich {
+  .btn_sandwich_open,
+  .btn_sandwich_close {
     display: none !important;
   }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100dvh;
+        display: flex;
+      }
+      .menu {
+        display: none;
+        height: 100%;
+        width: 250px;
+        background-color: black;
+
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+
+      .abrir {
+        flex: 0;
+      }
+    </style>
+    <div class="menu">
+      <button onclick="fechar()">fechar</button>
+    </div>
+    <div>
+      <button onclick="abrir()" class="abrir">abrir</button>
+    </div>
+  </body>
+  <script>
+    function abrir() {
+      document.querySelector(".menu").style.display = "block";
+      setInterval(() => {
+        document.querySelector(".menu").style.opacity = "1";
+      }, 100);
+    }
+  </script>
+</html>

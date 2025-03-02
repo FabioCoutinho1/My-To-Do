@@ -15,7 +15,7 @@ const btnEdit = document.querySelector(".btn_edit");
 const buttonSaveEdit = document.querySelector(".btn_save_edit");
 const tarefasFeitas = document.querySelector(".done");
 const btnCloseMenu = document.querySelector("#btn_close_menu");
-const btnSandwich = document.querySelectorAll(".btn_sandwich");
+const btnSandwich = document.querySelector(".btn_sandwich_open");
 
 let arrTarefa = [];
 let tarefas = [];
@@ -69,7 +69,10 @@ const salvarNoLocalStorage = (data) => {
 const mostrarMenuDireita = (text) => {
   const titleMenu = menuRigth.querySelector("nav h1");
   if (titleMenu.textContent.trim() === text) {
-    menuRigth.classList.remove("hidden");
+    menuRigth.style.right = "0px"
+    setTimeout(()=>{
+      menuMid.style.marginRight = "300px"
+    },200)
   }
 };
 
@@ -105,7 +108,7 @@ const searchFunction = () => {
   const tasks = menuMid.querySelectorAll(".task h3");
   if (search.value !== "") {
     console.log(tasks);
-    tasks.forEach((element, idx) => {
+    tasks.forEach((element) => {
       if (!element.textContent.includes(search.value)) {
         element.parentNode.classList.add("hidden");
       }
@@ -229,15 +232,15 @@ btnEdit.addEventListener("click", () => {
 search.addEventListener("input", searchFunction);
 
 btnCloseMenu.addEventListener("click", () => {
-  menuRigth.classList.toggle("hidden");
+  menuRigth.style.right = "-100%"
+  menuMid.style.marginRight = "0"
+
+  
 });
 
-btnSandwich.forEach((element) => {
-  element.addEventListener("click", (e) => {
-    e.stopPropagation();
-    menuLeft.classList.toggle("hidden");
-    menuMid.classList.toggle("overlay");
-  });
+btnSandwich.addEventListener("click", () => {
+  menuLeft.style.left = "0px";
+  menuMid.classList.toggle("overlay");
 });
 
 document.addEventListener("click", (e) => {
@@ -247,7 +250,7 @@ document.addEventListener("click", (e) => {
     element !== btnSandwich &&
     !element.contains(search)
   ) {
-    menuLeft.classList.add("hidden");
     menuMid.classList.remove("overlay");
+    menuLeft.style.left = "-100%";
   }
 });
