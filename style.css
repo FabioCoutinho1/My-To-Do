@@ -134,6 +134,11 @@ button {
   margin-bottom: 1rem;
 
   background-color: rgb(51, 51, 51);
+  cursor: pointer;
+}
+
+.task:hover {
+  background-color: rgb(65, 65, 65);
 }
 
 .task h3 {
