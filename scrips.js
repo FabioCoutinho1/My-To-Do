@@ -76,6 +76,11 @@ const mostrarMenuDireita = (text) => {
   }
 };
 
+const naoMostrarMenuDireita = ()=>{
+  menuRigth.style.right = "-100%";
+  menuMid.style.marginRight = "0";
+}
+
 const mostrarEnaoMostrar = () => {
   arrayMostrarNaoMostrar.forEach((element) => {
     element.classList.toggle("hidden");
@@ -209,13 +214,12 @@ btnDelete.addEventListener("click", () => {
       tarefas.parentNode.remove();
     }
   });
-  
+
   arrTarefa = arrTarefa.filter(
     (item) => item.task.trim() !== tituloMenuDireita
   );
   localStorage.myarr = JSON.stringify(arrTarefa);
-  mostrarMenuDireita(titleTask);
-
+  naoMostrarMenuDireita()
 });
 
 btnEdit.addEventListener("click", () => {
@@ -232,8 +236,7 @@ btnEdit.addEventListener("click", () => {
 search.addEventListener("input", searchFunction);
 
 btnCloseMenu.addEventListener("click", () => {
-  menuRigth.style.right = "-100%";
-  menuMid.style.marginRight = "0";
+  naoMostrarMenuDireita()
 });
 
 btnSandwich.addEventListener("click", () => {
