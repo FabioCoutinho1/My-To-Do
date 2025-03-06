@@ -76,10 +76,10 @@ const mostrarMenuDireita = (text) => {
   }
 };
 
-const naoMostrarMenuDireita = ()=>{
+const naoMostrarMenuDireita = () => {
   menuRigth.style.right = "-100%";
   menuMid.style.marginRight = "0";
-}
+};
 
 const mostrarEnaoMostrar = () => {
   arrayMostrarNaoMostrar.forEach((element) => {
@@ -219,7 +219,7 @@ btnDelete.addEventListener("click", () => {
     (item) => item.task.trim() !== tituloMenuDireita
   );
   localStorage.myarr = JSON.stringify(arrTarefa);
-  naoMostrarMenuDireita()
+  naoMostrarMenuDireita();
 });
 
 btnEdit.addEventListener("click", () => {
@@ -236,7 +236,7 @@ btnEdit.addEventListener("click", () => {
 search.addEventListener("input", searchFunction);
 
 btnCloseMenu.addEventListener("click", () => {
-  naoMostrarMenuDireita()
+  naoMostrarMenuDireita();
 });
 
 btnSandwich.addEventListener("click", () => {
