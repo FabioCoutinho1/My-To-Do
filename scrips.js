@@ -120,7 +120,13 @@ const searchFunction = () => {
     });
   } else {
     tasks.forEach((element) => {
-      element.parentNode.style.display = "flex";
+      const elementNode = element.parentNode
+      if(elementNode.querySelector("h3").textContent === ""){
+        elementNode.style.display = "none";
+        return
+      }
+      
+      elementNode.style.display = "flex";
     });
   }
 };
