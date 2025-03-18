@@ -43,7 +43,7 @@ function carregarPagina() {
       tarefasFeitas.appendChild(div);
       div.querySelector(
         "button"
-      ).innerHTML = `<span class="material-symbols-outlined"> radio_button_checked </span>`;
+      ).innerHTML = `<i class="fa-solid fa-circle-check"><i>`;
     }
   });
 
@@ -120,12 +120,12 @@ const searchFunction = () => {
     });
   } else {
     tasks.forEach((element) => {
-      const elementNode = element.parentNode
-      if(elementNode.querySelector("h3").textContent === ""){
+      const elementNode = element.parentNode;
+      if (elementNode.querySelector("h3").textContent === "") {
         elementNode.style.display = "none";
-        return
+        return;
       }
-      
+
       elementNode.style.display = "flex";
     });
   }
@@ -137,10 +137,10 @@ const marcarTarefaFeita = (botaDinamico, title) => {
 
   if (estaMaracado) {
     tarefasFeitas.appendChild(paiBotao);
-    botaDinamico.innerHTML = `<span class="material-symbols-outlined"> radio_button_checked </span>`;
+    botaDinamico.innerHTML = `<i class="fa-solid fa-circle-check"><i>`;
   } else {
     divTarefas.appendChild(paiBotao);
-    botaDinamico.innerHTML = `<span class="material-symbols-outlined"> radio_button_unchecked </span>`;
+    botaDinamico.innerHTML = ` <i class="fa-regular fa-circle"></i>`;
   }
 
   arrTarefa = JSON.parse(localStorage.getItem("myarr"));

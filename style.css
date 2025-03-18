@@ -50,6 +50,7 @@ button {
   display: flex;
 }
 
+
 /* class */
 
 .menu_left,
@@ -180,7 +181,12 @@ button {
   background-color: transparent;
   border: none;
   color: white;
+  font-size: 2rem;
   cursor: pointer;
+}
+
+.btn_done i{
+  pointer-events: none;
 }
 
 .mid_task .form_add {
@@ -196,14 +202,15 @@ button {
   background-color: transparent;
   border: none;
   color: white;
+  font-size: 2rem;
   cursor: pointer;
 
   height: 5rem;
   width: 5rem;
 
   position: absolute;
-  top: 1.2rem;
-  left: 1.2rem;
+  top: 1.5rem;
+  left: 1.5rem;
 }
 
 /* fim mid */
