@@ -50,7 +50,6 @@ button {
   display: flex;
 }
 
-
 /* class */
 
 .menu_left,
@@ -101,7 +100,6 @@ button {
 }
 
 .utilities {
-
   border-radius: 0.5rem;
 }
 
@@ -111,9 +109,13 @@ button {
   gap: 0.5rem;
 
   padding: 1rem;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+}
+
+.text-important{
+  flex: 1;
 }
 
 .utilities ul li:hover {
@@ -185,7 +187,22 @@ button {
   cursor: pointer;
 }
 
-.btn_done i{
+.btn_done i {
+  pointer-events: none;
+}
+
+.star {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.star-important{
+  color: gold;
+}
+.star i{
   pointer-events: none;
 }
 

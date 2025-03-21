@@ -4,6 +4,7 @@ const editForm = document.querySelector("#edit_form");
 const input = document.querySelector("#id_task");
 const editInput = document.querySelector("#id_task_edit");
 const divTarefas = document.querySelector(".box_tasks");
+const stars = document.querySelectorAll(".star");
 const tarefaFilha = document.querySelector(".task");
 const cancalBtn = document.querySelector(".btn_cancel");
 const search = document.querySelector("#search_task");
@@ -16,11 +17,13 @@ const buttonSaveEdit = document.querySelector(".btn_save_edit");
 const tarefasFeitas = document.querySelector(".done");
 const btnCloseMenu = document.querySelector("#btn_close_menu");
 const btnSandwich = document.querySelector(".btn_sandwich_open");
+const coutTasksImportant = document.querySelector("#cout-important");
 
 let arrTarefa = [];
 let tarefas = [];
 let oldText = "";
 let titleTask;
+let coutNumImportantat = 0;
 
 const arrayMostrarNaoMostrar = [
   form,
@@ -37,13 +40,16 @@ function carregarPagina() {
   }
   arrTarefa.forEach((item) => {
     criarTarefa(item.task);
+    const div = divTarefas.lastElementChild;
     if (item.checked) {
-      const div = divTarefas.lastElementChild;
       div.classList.add("checked");
       tarefasFeitas.appendChild(div);
       div.querySelector(
         "button"
       ).innerHTML = `<i class="fa-solid fa-circle-check"><i>`;
+    }
+    if (item.important) {
+      div.querySelector(".star").classList.add("star-important");
     }
   });
 
@@ -154,12 +160,35 @@ const marcarTarefaFeita = (botaDinamico, title) => {
   localStorage.setItem("myarr", JSON.stringify(arrTarefa));
 };
 
+const marcarInportante = (e, title) => {
+  const stateImportant = e.classList.toggle("star-important");
+
+  if (stateImportant) {
+    stateImportant;
+  }
+
+  arrTarefa = JSON.parse(localStorage.getItem("myarr"));
+  arrTarefa = arrTarefa.map((element) => {
+    if (element.task === title) {
+      return { ...element, important: stateImportant };
+    }
+    return element;
+  });
+
+  localStorage.setItem("myarr", JSON.stringify(arrTarefa));
+};
+
+const contarTarefasImportantes = ()=>{
+
+}
+
 //enventos
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const data = {
     task: input.value.trim(),
     checked: false,
+    important: false,
   };
 
   const { task } = data;
@@ -179,7 +208,6 @@ document.addEventListener("click", (e) => {
   }
 
   if (element.classList.contains("task") || element.closest("h3")) {
-    console.log(element);
     const titleMenuRigth = menuRigth.querySelector("nav h1");
     titleMenuRigth.textContent = titleTask;
 
@@ -190,6 +218,10 @@ document.addEventListener("click", (e) => {
 
   if (element.classList.contains("btn_done")) {
     marcarTarefaFeita(element, titleTask);
+  }
+
+  if (element.classList.contains("star")) {
+    marcarInportante(element, titleTask);
   }
 });
 
@@ -261,3 +293,5 @@ document.addEventListener("click", (e) => {
     menuLeft.style.left = "-100%";
   }
 });
+
+contarTarefasImportantes()
